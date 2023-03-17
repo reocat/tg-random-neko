@@ -26,8 +26,8 @@
 #include <ArduinoJson.h>
 
 // Wifi network station credentials
-#define WIFI_SSID "Nokia_4091"
-#define WIFI_PASSWORD "reocatwf"
+#define WIFI_SSID "Archer AX10"
+#define WIFI_PASSWORD "wfnwdnmsgK"
 // Telegram BOT Token (Get from Botfather)
 #define BOT_TOKEN "5943409433:AAFiRYyQwRPAj8jLStMRLiGHNSaICsinzwE"
 
@@ -48,7 +48,35 @@ void handleNewMessages(int numNewMessages) {
     String from_name = bot.messages[i].from_name;
     if (from_name == "") from_name = "Guest";
 
-    if (text == "/catgirl") {
+    if (text == "/neko") {
+      HTTPClient http;
+      http.begin("https://cataas.com/cat?json=true");
+      int httpResponseCode = http.GET();
+
+      if (httpResponseCode == 200) {
+        String payload = http.getString();
+
+        // Parse JSON payload
+        const size_t capacity = JSON_OBJECT_SIZE(1) + JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(3) + JSON_OBJECT_SIZE(4) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(6) + JSON_OBJECT_SIZE(7) + JSON_OBJECT_SIZE(8) + JSON_OBJECT_SIZE(9) + 340;
+        DynamicJsonDocument doc(capacity);
+        DeserializationError error = deserializeJson(doc, payload);
+
+        if (error) {
+          Serial.print("deserializeJson() failed: ");
+          Serial.println(error.f_str());
+        } else {
+          const char* gatoUrl = doc["url"];
+          bot.sendPhoto(chat_id, "https://cataas.com/" + String(gatoUrl));
+        }
+      } else {
+        Serial.print("HTTP GET failed, error code: ");
+        Serial.println(httpResponseCode);
+      }
+
+      http.end();
+    }
+
+    if (text == "/nekogirl") {
       HTTPClient http;
       http.begin("https://nekos.life/api/v2/img/neko");
       int httpResponseCode = http.GET();
@@ -66,7 +94,34 @@ void handleNewMessages(int numNewMessages) {
           Serial.println(error.f_str());
         } else {
           const char* nekoUrl = doc["url"];
-          bot.sendPhoto(chat_id, nekoUrl, "Caption is optional, you may not use photo caption");
+          bot.sendPhoto(chat_id, nekoUrl);
+        }
+      } else {
+        Serial.print("HTTP GET failed, error code: ");
+        Serial.println(httpResponseCode);
+      }
+
+      http.end();
+    }
+    if (text == "/kitsunegirl") {
+      HTTPClient http;
+      http.begin("https://nekos.life/api/v2/img/fox_girl");
+      int httpResponseCode = http.GET();
+
+      if (httpResponseCode == 200) {
+        String payload = http.getString();
+
+        // Parse JSON payload
+        const size_t capacity = JSON_OBJECT_SIZE(1) + JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(3) + JSON_OBJECT_SIZE(4) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(6) + JSON_OBJECT_SIZE(7) + JSON_OBJECT_SIZE(8) + JSON_OBJECT_SIZE(9) + 340;
+        DynamicJsonDocument doc(capacity);
+        DeserializationError error = deserializeJson(doc, payload);
+
+        if (error) {
+          Serial.print("deserializeJson() failed: ");
+          Serial.println(error.f_str());
+        } else {
+          const char* kitsuneUrl = doc["url"];
+          bot.sendPhoto(chat_id, kitsuneUrl);
         }
       } else {
         Serial.print("HTTP GET failed, error code: ");
