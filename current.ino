@@ -26,10 +26,10 @@
 #include <ArduinoJson.h>
 
 // Wifi network station credentials
-#define WIFI_SSID "Archer AX10"
-#define WIFI_PASSWORD "wfnwdnmsgK"
+#define WIFI_SSID "TP-Link_E3F4"
+#define WIFI_PASSWORD "91513687"
 // Telegram BOT Token (Get from Botfather)
-#define BOT_TOKEN "5943409433:AAFiRYyQwRPAj8jLStMRLiGHNSaICsinzwE"
+#define BOT_TOKEN "5736860380:AAFZVi5bSWzlv6C5vbv1aVh1K1swEPrxjZs"
 
 const unsigned long BOT_MTBS = 1000;  // mean time between scan messages
 
