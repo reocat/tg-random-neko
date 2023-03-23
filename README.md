@@ -9,6 +9,9 @@ Arduino IDE;
 
 Download ino file from repository.
 
-Install these libraries: UniversalTelegramBot and ArduinoJSON.
+Install these libraries:
+
+- UniversalTelegramBot
+- ArduinoJSON.
 
 Add your telegram token, fill up WiFi credentials and flash a code.
