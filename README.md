@@ -4,14 +4,15 @@ Meow! This telegram bot is purrfectly designed to bring a little bit of cuteness
 
 # Instructions:
 If you want to make your own bot from these sources, then you need:
-ESP32;
-Arduino IDE;
+
+- ESP32
+- Arduino IDE
 
 Download ino file from repository.
 
 Install these libraries:
 
 - UniversalTelegramBot
-- ArduinoJSON.
+- ArduinoJSON
 
 Add your telegram token, fill up WiFi credentials and flash a code.
