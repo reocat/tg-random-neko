@@ -76,6 +76,35 @@ void handleNewMessages(int numNewMessages) {
       http.end();
     }
 
+    if (text == "/kitsune") {
+      HTTPClient http;
+      http.begin("https://randomfox.ca/floof");
+      int httpResponseCode = http.GET();
+
+      if (httpResponseCode == 200) {
+        String payload = http.getString();
+
+        // Parse JSON payload
+        const size_t capacity = JSON_OBJECT_SIZE(1) + JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(3) + JSON_OBJECT_SIZE(4) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(6) + JSON_OBJECT_SIZE(7) + JSON_OBJECT_SIZE(8) + JSON_OBJECT_SIZE(9) + 340;
+        DynamicJsonDocument doc(capacity);
+        DeserializationError error = deserializeJson(doc, payload);
+
+        if (error) {
+          Serial.print("deserializeJson() failed: ");
+          Serial.println(error.f_str());
+        } else {
+          const char* foxUrl = doc["image"];
+          bot.sendPhoto(chat_id, String(foxUrl));
+        }
+      } else {
+        Serial.print("HTTP GET failed, error code: ");
+        Serial.println(httpResponseCode);
+      }
+
+      http.end();
+    }
+
+
     if (text == "/nekogirl") {
       HTTPClient http;
       http.begin("https://nekos.life/api/v2/img/neko");
